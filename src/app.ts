@@ -17,7 +17,7 @@ app.use(
 // Third party middleware configuration
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser..urlencoded({extended: true}))
 
 // Routers configuration
 app.use('/api/v1/vote', voteRouter)
