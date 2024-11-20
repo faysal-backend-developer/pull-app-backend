@@ -7,10 +7,11 @@
     "dev:start": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:check": "eslint .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "prepare": "husky"
+    "prepare": "husky && husky install",
+    "lint:format": "yarn lint:check && yarn format"
   },
   "lint-staged": {
-    "*/**": "yarn format && yarn lint:check"
+    "src/**/*.ts": "yarn lint:format"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
@@ -29,7 +30,7 @@
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.12.0",
-    "husky": "^9.1.7",
+    "husky": "^8.0.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "ts-node-dev": "^2.0.0",
