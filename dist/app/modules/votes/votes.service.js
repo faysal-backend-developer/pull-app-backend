@@ -44,6 +44,24 @@ const create = data =>
       return result
     }
   })
+const updateVote = (id, data) =>
+  __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield votes_model_1.Vote.findByIdAndUpdate({_id: id}, data)
+    if (!result) {
+      throw new Error(`Could not find & Update Vote`)
+    } else {
+      return result
+    }
+  })
+const getOneVote = id =>
+  __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield votes_model_1.Vote.findById({_id: id})
+    if (!result) {
+      throw new Error(`Could not find Vote`)
+    } else {
+      return result
+    }
+  })
 const allVotes = () =>
   __awaiter(void 0, void 0, void 0, function* () {
     const result = yield votes_model_1.Vote.find()
@@ -53,7 +71,19 @@ const allVotes = () =>
       return result
     }
   })
+const deleteVotes = id =>
+  __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield votes_model_1.Vote.deleteOne({_id: id})
+    if (!result) {
+      throw new Error(`Could not delete Vote`)
+    } else {
+      return result
+    }
+  })
 exports.voteService = {
   create,
   allVotes,
+  deleteVotes,
+  updateVote,
+  getOneVote,
 }

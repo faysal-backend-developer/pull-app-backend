@@ -39,13 +39,14 @@ var __importDefault =
   }
 Object.defineProperty(exports, '__esModule', {value: true})
 const mongoose_1 = __importDefault(require('mongoose'))
+const logger_1 = __importDefault(require('../app/helper/winston/logger'))
 const dbConnection = url =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
       yield mongoose_1.default.connect(url)
-      console.log(`Connected to ${url}`)
+      logger_1.default.info(`Connected to ${url}`)
     } catch (error) {
-      console.log(`Database connection error: ${error}`)
+      logger_1.default.error(`Database connection error: ${error}`)
     }
   })
 exports.default = dbConnection

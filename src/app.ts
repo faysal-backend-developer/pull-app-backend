@@ -3,6 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import voteRouter from './app/modules/votes/votes.router'
 import commentsRouter from './app/modules/comments/comments.router'
+import globalErrorHandler from './app/middlewares/globalErrorHandler'
 
 const app = express()
 
@@ -28,5 +29,8 @@ app.get('/api/v1/test-api', (req: Request, res: Response) => {
     message: 'Pull App Running from test API',
   })
 })
+
+// Global Error Handler
+app.use(globalErrorHandler)
 
 export default app
