@@ -38,19 +38,27 @@ var __importDefault =
     return mod && mod.__esModule ? mod : {default: mod}
   }
 Object.defineProperty(exports, '__esModule', {value: true})
-const app_1 = __importDefault(require('./app'))
-const config_1 = __importDefault(require('./config'))
-const db_1 = __importDefault(require('./db'))
-const logger_1 = __importDefault(require('./app/helper/winston/logger'))
-const server = () =>
+exports.commentsController = void 0
+const comments_service_1 = require('./comments.service')
+const apiError_1 = __importDefault(require('../../errors/apiError'))
+const http_status_codes_1 = require('http-status-codes')
+const create = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
-    try {
-      yield (0, db_1.default)(config_1.default.db_url)
-      app_1.default.listen(config_1.default.port, () => {
-        logger_1.default.info(`server listening on ${config_1.default.port}`)
+    const {comments} = req.body
+    if (!comments) {
+      throw new apiError_1.default(
+        http_status_codes_1.StatusCodes.NO_CONTENT,
+        'Comments Data is required',
+      )
+    } else {
+      const result = yield comments_service_1.commentService.create(comments)
+      res.status(200).json({
+        status: 200,
+        message: 'Comments created successfully',
+        data: result,
       })
-    } catch (error) {
-      logger_1.default.error(`Server Error: ${error}`)
     }
   })
-server()
+exports.commentsController = {
+  create,
+}

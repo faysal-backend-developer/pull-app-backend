@@ -38,19 +38,22 @@ var __importDefault =
     return mod && mod.__esModule ? mod : {default: mod}
   }
 Object.defineProperty(exports, '__esModule', {value: true})
-const app_1 = __importDefault(require('./app'))
-const config_1 = __importDefault(require('./config'))
-const db_1 = __importDefault(require('./db'))
-const logger_1 = __importDefault(require('./app/helper/winston/logger'))
-const server = () =>
+exports.commentService = void 0
+const comments_model_1 = require('./comments.model')
+const apiError_1 = __importDefault(require('../../errors/apiError'))
+const http_status_codes_1 = require('http-status-codes')
+const create = data =>
   __awaiter(void 0, void 0, void 0, function* () {
-    try {
-      yield (0, db_1.default)(config_1.default.db_url)
-      app_1.default.listen(config_1.default.port, () => {
-        logger_1.default.info(`server listening on ${config_1.default.port}`)
-      })
-    } catch (error) {
-      logger_1.default.error(`Server Error: ${error}`)
+    const result = yield comments_model_1.Comments.create(data)
+    if (!result) {
+      throw new apiError_1.default(
+        http_status_codes_1.StatusCodes.BAD_REQUEST,
+        'Could not create comments',
+      )
+    } else {
+      return result
     }
   })
-server()
+exports.commentService = {
+  create,
+}

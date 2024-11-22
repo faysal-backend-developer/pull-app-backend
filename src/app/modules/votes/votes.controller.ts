@@ -1,7 +1,7 @@
-import {Request, Response} from 'express'
+import {RequestHandler} from 'express'
 import {voteService} from './votes.service'
 
-const create = async (req: Request, res: Response): Promise<void> => {
+const create: RequestHandler = async (req, res): Promise<void> => {
   const {data} = req.body
   if (!data) {
     res.status(400).json({message: 'Data is required'})
@@ -15,7 +15,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-const allVotes = async (req: Request, res: Response): Promise<void> => {
+const allVotes: RequestHandler = async (req, res): Promise<void> => {
   const result = await voteService.allVotes()
   if (!result) {
     res.status(404).json({message: 'No votes found'})
@@ -28,7 +28,7 @@ const allVotes = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-const voteDelete = async (req: Request, res: Response): Promise<void> => {
+const voteDelete: RequestHandler = async (req, res): Promise<void> => {
   const {id} = req.params
   if (!id) {
     res.status(400).json({message: 'Id is required'})
@@ -42,7 +42,7 @@ const voteDelete = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-const UpdateVote = async (req: Request, res: Response): Promise<void> => {
+const UpdateVote: RequestHandler = async (req, res): Promise<void> => {
   const {id} = req.params
   const {data} = req.body
   if (!id || !data) {
@@ -56,7 +56,7 @@ const UpdateVote = async (req: Request, res: Response): Promise<void> => {
     })
   }
 }
-const findOneVote = async (req: Request, res: Response): Promise<void> => {
+const findOneVote: RequestHandler = async (req, res): Promise<void> => {
   const {id} = req.params
   if (!id) {
     res.status(400).json({message: 'Id is required'})

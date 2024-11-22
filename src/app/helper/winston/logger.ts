@@ -6,7 +6,7 @@ import path from 'path'
 
 const logger = createLogger({
   level: 'info',
-  format: combine(label({label: 'right meow!'}), timestamp(), prettyPrint()),
+  format: combine(label({label: 'Pull App'}), timestamp(), prettyPrint()),
   transports: [
     new DailyRotateFile({
       filename: path.join(process.cwd(), 'logs', 'pull-app-%DATE%.error.log'),
