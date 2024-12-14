@@ -35,9 +35,10 @@ const run = async () => {
 
 run()
 
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received: closing HTTP server')
-  if (server) {
-    server.close()
-  }
-})
+// ! when app is started, uncomment the following line
+// process.on('SIGTERM', () => {
+//   logger.info('SIGTERM signal received: closing HTTP server')
+//   if (server) {
+//     server.close()
+//   }
+// })
