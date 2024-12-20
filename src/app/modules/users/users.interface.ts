@@ -1,11 +1,8 @@
-export type IUser = {
-  id: string
-  name: string
+export interface IProfile {
+  firstName: string
+  lastName: string
   email: string
   password: string
-  isAdmin: boolean
-  coins: number
-  isVerified: boolean
-  userName: string
   profilePicture: string
+  username: string
 }

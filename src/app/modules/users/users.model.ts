@@ -1,16 +1,13 @@
-import {model, Model, Schema} from 'mongoose'
-import {IUser} from './users.interface'
+import {model, Schema} from 'mongoose'
+import {IProfile} from './users.interface'
 
-type UserModel = Model<IUser, object, object>
-
-const userSchema = new Schema<IUser, UserModel>(
+const profileSchema = new Schema<IProfile>(
   {
-    id: {
+    firstName: {
       type: String,
       required: true,
-      unique: true,
     },
-    name: {
+    lastName: {
       type: String,
       required: true,
     },
@@ -19,35 +16,23 @@ const userSchema = new Schema<IUser, UserModel>(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-    userName: {
+    username: {
       type: String,
       required: true,
       unique: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     profilePicture: {
       type: String,
-      default: null,
-    },
-    coins: {
-      type: Number,
-      default: 0,
     },
   },
   {
     timestamps: true,
+    collection: 'profile',
   },
 )
 
-export const user = model<IUser, UserModel>('User', userSchema)
+export const profile = model<IProfile>('Profile', profileSchema)
