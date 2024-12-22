@@ -10,4 +10,10 @@ export default {
   port: process.env.PORT,
   db_url: process.env.DATABASE_URL,
   salt_round: process.env.SALT_ROUND,
+  jwt: {
+    jwt_secret_key: process.env.JWT_SECRET_KEY,
+    jwt_expires: process.env.JWT_EXPIRES,
+    jwt_refresh_secret_key: process.env.JWT_REFRESH_SECRET_KEY,
+    jwt_refresh_expires: process.env.JWT_REFRESH_EXPIRES,
+  },
 }

@@ -3,6 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import globalErrorHandler from './app/middlewares/globalErrorHandler'
 import routers from './app/modules/routers/index'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cookieParser())
 
 // Routers configuration
 app.use('/api/v1/', routers)

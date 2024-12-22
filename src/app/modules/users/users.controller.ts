@@ -10,6 +10,7 @@ const createProfile = async (
     const profileData = req.body.profile
 
     const result = await userService.createProfile(profileData)
+
     res.send({
       message: 'Profile created successfully',
       data: {
